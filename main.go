@@ -90,5 +90,5 @@ func showArgumentErr() {
 
 func showExample() {
 	fmt.Println("Usage: [-n..] ubd <search-term>")
-	fmt.Printf("Example: ubd mansplain\n\n")
+	fmt.Printf("Example: ubd bird\n\n")
 }
