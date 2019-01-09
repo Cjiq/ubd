@@ -64,6 +64,7 @@ func main() {
 	err = json.Unmarshal(res, &result)
 	if err != nil {
 		fmt.Printf("Failed to parse json: %s", err)
+		os.Exit(1)
 	}
 
 	sort.Slice(result.Definitions, func(i, j int) bool {
