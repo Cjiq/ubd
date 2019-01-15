@@ -18,12 +18,10 @@ import (
 type context struct {
 	n int
 	h bool
+	e bool
 }
 
-var con *context = &context{
-	n: 3,
-	h: false,
-}
+var con *context = &context{}
 
 var apiURL = "https://api.urbandictionary.com/v0/define?term="
 
@@ -31,6 +29,8 @@ func init() {
 	flag.IntVar(&con.n, "n", 3, "Number of results. -n 0 returns all.")
 	flag.BoolVar(&con.h, "h", false, "Show help")
 	flag.BoolVar(&con.h, "help", false, "Show help")
+	flag.BoolVar(&con.e, "e", false, "Show example or definition")
+	flag.BoolVar(&con.e, "example", false, "Show example or definition")
 	flag.Parse()
 	if con.h {
 		fmt.Println("UrbanDictionary.com v0.0.1")
@@ -75,9 +75,12 @@ func main() {
 	d.Printf("Term: %s\n\n", searchTerm)
 
 	for i, def := range result.Definitions {
-		trim := strings.Replace(def.Text, "^M", "", -1)
 		d.Printf("Definition #%d: ", (i + 1))
-		fmt.Printf("%s\n\n", trim)
+		fmt.Printf("%s\n", trim(def.Text))
+		if con.e {
+			fmt.Printf("  Example: %s\n", trim(def.Example))
+		}
+		fmt.Println()
 		if (i+1) == con.n && con.n != 0 {
 			break
 		}
@@ -92,4 +95,8 @@ func showArgumentErr() {
 func showExample() {
 	fmt.Println("Usage: [-n..] ubd <search-term>")
 	fmt.Printf("Example: ubd bird\n\n")
+}
+
+func trim(input string) string {
+	return strings.Replace(input, "^M", "", -1)
 }
