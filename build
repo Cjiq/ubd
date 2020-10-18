@@ -1,3 +1,4 @@
 #!/bin/bash
 go build -o dist/macOS/ubd main.go
 GOOS=windows GOARCH=amd64 go build -o dist/windows/ubd.exe main.go
+GOOS=linux GOARCH=amd64 go build -o dist/linux/ubd main.go

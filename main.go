@@ -11,7 +11,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/Cjiq/ubd/data"
+	"github.com/cjiq/ubd/data"
 	"github.com/fatih/color"
 )
 
